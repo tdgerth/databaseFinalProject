@@ -1,0 +1,47 @@
+<mat-toolbar color="warn">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <h1>UARK DB Project</h1>
+    <span class="menu-spacer"></span>
+    <div>
+      <a mat-button [routerLink]="'/home'"> Home </a>
+      <a mat-button [routerLink]="'/add/student'"> Add Student </a>
+      <a mat-button [routerLink]="'/add/course'"> Add Course </a>
+      <a mat-button [routerLink]="'/add/enrollment'"> Add Application </a>
+      <a mat-button [routerLink]="'/view/student'"> View Students </a>
+      <a mat-button [routerLink]="'/view/course/byDept'"> View Courses by Dept. </a>
+      <a mat-button [routerLink]="'/view/course/byStudent'"> View Courses by Student </a>
+
+    </div>
+  </mat-toolbar-row>
+
+  <mat-toolbar-row>
+    <span style="font-size: 12px;">Created by: Austin Chitmon (ID: 010754712) & Tyler Gerth (ID: 010811790)</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+
+  <mat-sidenav #sidenav mode="push">
+    <mat-nav-list>
+
+      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/home'" > Home </a>
+      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/add/student'" > Add Student </a>
+      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/add/course'" > Add Course </a>
+      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/add/enrollment'" > Add Application </a>
+      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/view/student'" > View Students </a>
+      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/view/course/byDept'" > View Courses by Department </a>
+      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/view/course/byStudent'" > View Courses by Student </a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+

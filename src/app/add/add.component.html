@@ -1,0 +1,93 @@
+<div style="height: 2000px">
+    <mat-card class="home-card">
+      <mat-card-header>
+        <mat-card-title>Add Item</mat-card-title>
+        <mat-card-subtitle>{{ welcomeMsg }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngIf="addStudentScreen" class="add-content">
+          <mat-form-field class="add-student-form">
+            <mat-label>Student Name:</mat-label>
+            <input matInput type="text" [(ngModel)]="studentName">
+            <button mat-button *ngIf="studentName" matSuffix mat-icon-button aria-label="Clear" (click)="studentName=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+          <br>
+          <mat-form-field class="add-student-form">
+            <mat-label>Student Major:</mat-label>
+            <input matInput type="text" [(ngModel)]="studentMajor">
+            <button mat-button *ngIf="studentMajor" matSuffix mat-icon-button aria-label="Clear" (click)="studentMajor=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+          <br>
+          <button mat-raised-button color="primary" (click)="verifyStudent()">Add Student</button>
+        </div>
+
+        <div *ngIf="addCourseScreen" class="add-content">
+          <mat-form-field>
+            <mat-label>Department Code:</mat-label>
+            <input matInput type="text" [(ngModel)]="courseDeptCode">
+            <button mat-button *ngIf="courseDeptCode" matSuffix mat-icon-button aria-label="Clear" (click)="courseDeptCode=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <mat-label>Course Number:</mat-label>
+            <input matInput type="number" [(ngModel)]="courseNumber">
+            <button mat-button *ngIf="courseNumber" matSuffix mat-icon-button aria-label="Clear" (click)="courseNumber=undefined">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <mat-label>Course Title:</mat-label>
+            <input matInput type="text" [(ngModel)]="courseTitle">
+            <button mat-button *ngIf="courseTitle" matSuffix mat-icon-button aria-label="Clear" (click)="courseTitle=''">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+          <br>
+          <mat-form-field>
+            <mat-label>Course Credit Hours:</mat-label>
+            <input matInput type="number" [(ngModel)]="courseCreditHours">
+            <button mat-button *ngIf="courseCreditHours" matSuffix mat-icon-button aria-label="Clear" (click)="courseCreditHours=undefined">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+          <br>
+          <button mat-raised-button color="primary" (click)="verifyCourse()">Add Course</button>
+        </div>
+
+        <div *ngIf="addApplicationScreen" class="add-content">
+            <mat-form-field>
+              <mat-label>Student Id:</mat-label>
+              <input matInput type="number" [(ngModel)]="applicationStudentId">
+              <button mat-button *ngIf="applicationStudentId" matSuffix mat-icon-button aria-label="Clear" (click)="applicationStudentId=undefined">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <mat-label>Department Code</mat-label>
+              <input matInput type="text" [(ngModel)]="applicationDeptCode">
+              <button mat-button *ngIf="applicationDeptCode" matSuffix mat-icon-button aria-label="Clear" (click)="applicationDeptCode=''">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <mat-label>Course Number</mat-label>
+              <input matInput type="number" [(ngModel)]="applicationCourseNumber">
+              <button mat-button *ngIf="applicationCourseNumber" matSuffix mat-icon-button aria-label="Clear" (click)="applicationCourseNumber=undefined">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+            <br>
+            <button mat-raised-button color="primary" (click)="verifyApplication()">Add Application</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+</div>

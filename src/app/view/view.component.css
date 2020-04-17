@@ -1,0 +1,25 @@
+.home-card {
+    max-width: 400px;
+    margin: 20px;
+}
+  
+.header {
+    font-size: 30px;
+}
+
+.view-content {
+    margin: 20px;
+}
+
+table {
+    width: 100%;
+}
+
+.container {
+    display: flex;
+}
+
+.dataTable {
+    margin: 20px;
+    width: 100%;
+}
