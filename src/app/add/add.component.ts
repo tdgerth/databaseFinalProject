@@ -12,7 +12,7 @@ export class AddComponent implements OnInit {
 
   type: RouteTypes;
   welcomeMsg: string;
-  serverUrl = 'http://uark-db-project.herokuapp.com';
+  serverUrl = 'https://uark-db-project.herokuapp.com';
 
   // Add Student Variables
   addStudentScreen: boolean;
