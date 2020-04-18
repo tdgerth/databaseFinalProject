@@ -7,12 +7,9 @@ const bodyParser = require('body-parser');
 
 const clientCredentials = {
   connectionString: process.env.DATABASE_URL,
-  ssl: true,
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
+  ssl: {
+    require: true,
+    rejectUnauthorized: false
   }
 };
 
