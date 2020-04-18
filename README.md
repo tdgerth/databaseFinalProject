@@ -98,7 +98,7 @@ INSERT INTO Courses VALUES
 	('PSYC', '2013', 'Statistics for Psychology', '3');
 
 CREATE TABLE Enrollments (
-	StudentId BIGINT REFERENCES Students(StudentId),
+	StudentId INTEGER REFERENCES Students(StudentId),
 	DeptCode CHAR(4) REFERENCES Departments(DeptCode),
 	CourseNum CHAR(4) NOT NULL,
 	PRIMARY KEY(StudentId, DeptCode, CourseNum)
@@ -107,7 +107,7 @@ CREATE TABLE Enrollments (
 INSERT INTO Enrollments VALUES 
 	(3, 'CSCE', '4543'),
 	(3, 'CSCE', '4523'),
-	(3, 'CSCE', '4443'),
+	(3, 'CSCE', '4433'),
 	(3, 'PHIL', '3253'),
 	(3, 'PHIL', '2013');
 ```
