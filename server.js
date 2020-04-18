@@ -6,10 +6,10 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 const clientCredentials = {
-  user: 'utpqralljqxrdn',
-  host: 'ec2-3-223-21-106.compute-1.amazonaws.com',
-  database: 'd2otma7f5g1or7',
-  password: 'a56266ed55ed80c76fffe4f5ff97f5881b507bf6a57195c365e80db98e4ac59a',
+  user: 'grhsssepqenmwa',
+  host: 'ec2-3-234-109-123.compute-1.amazonaws.com',
+  database: 'd7ecpq3ej6nkqm',
+  password: '32b270837ef41fda1db1e4b44efef0a1462c2d3893b54a63a8edeb296d2870e3',
   port: 5432,
   ssl: true
 };
@@ -51,7 +51,7 @@ app.post('/addCourse', (req, res) => {
       console.log(err);
       return res.status(500).json({success: false, data: err});
     }
-    const insertCourseQuery = client.query(`INSERT INTO courses('${req.body.courseDeptCode}', ${req.body.courseNumber}, ${req.body.courseTitle}, ${req.body.courseCreditHours})`, (error, results) => {
+    const insertCourseQuery = client.query(`INSERT INTO courses VALUES('${req.body.courseDeptCode.toUpperCase()}', '${req.body.courseNum}', '${req.body.courseTitle}', '${req.body.courseCreditHours}')`, (error, results) => {
       if (error) {
         throw error;
       }
@@ -68,7 +68,8 @@ app.post('/addApplication', (req, res) => {
       console.log(err);
       return res.status(500).json({success: false, data: err});
     }
-    const insertApplicationQuery = client.query(`INSERT INTO enrollments('${req.body.applicationStudentId}', ${req.body.applicationDeptCode}, ${req.body.applicationCourseNum})`, (error, results) => {
+    console.log(`INSERT INTO enrollments VALUES(${req.body.applicationStudentId}, '${req.body.applicationDeptCode.toUpperCase()}', '${req.body.applicationCourseNumber}')`)
+    const insertApplicationQuery = client.query(`INSERT INTO enrollments VALUES(${req.body.applicationStudentId}, '${req.body.applicationDeptCode.toUpperCase()}', '${req.body.applicationCourseNumber}')`, (error, results) => {
       if (error) {
         throw error;
       }
