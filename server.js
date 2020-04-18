@@ -6,7 +6,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 const clientCredentials = {
-  connectionStrin: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL,
   ssl: true
 };
 
