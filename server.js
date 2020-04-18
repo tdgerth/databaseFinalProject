@@ -6,11 +6,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 const clientCredentials = {
-  user: 'grhsssepqenmwa',
-  host: 'ec2-3-234-109-123.compute-1.amazonaws.com',
-  database: 'd7ecpq3ej6nkqm',
-  password: '32b270837ef41fda1db1e4b44efef0a1462c2d3893b54a63a8edeb296d2870e3',
-  port: 5432,
+  connectionStrin: process.env.DATABASE_URL,
   ssl: true
 };
 
