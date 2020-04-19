@@ -7,76 +7,77 @@
           <mat-card-subtitle>{{ welcomeMsg }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <div *ngIf="viewStudentsScreen" class="view-content">
+          <div *ngIf="studentsView.viewStudentsScreen" class="view-content">
               <button mat-raised-button color="primary" (click)="getStudents()">View Students</button>
           </div>
-  
-          <div *ngIf="viewStudentCoursesScreen" class="view-content">
+
+          <div *ngIf="coursesByStudentView.viewStudentCoursesScreen" class="view-content">
             <mat-form-field>
               <mat-label>Student ID:</mat-label>
-              <input matInput type="string" [(ngModel)]="studentId">
-              <button mat-button *ngIf="studentId" matSuffix mat-icon-button aria-label="Clear" (click)="studentId=''">
+              <input matInput type="string" [(ngModel)]="coursesByStudentView.studentId">
+              <button mat-button *ngIf="coursesByStudentView.studentId" matSuffix mat-icon-button aria-label="Clear" (click)="coursesByStudentView.studentId=''">
                 <mat-icon>close</mat-icon>
               </button>
             </mat-form-field>
             <br>
             <button mat-raised-button color="primary" (click)="verifyStudentId()">View Student Courses</button>
           </div>
-  
-          <div *ngIf="viewDepartmentCourseScreen" class="view-content">
+
+          <div *ngIf="coursesByDeptView.viewDepartmentCourseScreen" class="view-content">
               <mat-form-field>
                   <mat-label>Department:</mat-label>
-                  <input matInput type="string" [(ngModel)]="department">
-                  <button mat-button *ngIf="department" matSuffix mat-icon-button aria-label="Clear" (click)="department=''">
+                  <input matInput type="string" [(ngModel)]="coursesByDeptView.department">
+                  <button mat-button *ngIf="coursesByDeptView.department" matSuffix mat-icon-button aria-label="Clear" (click)="coursesByDeptView.department=''">
                   <mat-icon>close</mat-icon>
                   </button>
               </mat-form-field>
               <br>
               <button mat-raised-button color="primary" (click)="verifyDepartment()">View Department Courses</button>
           </div>
+          <div class="errorMsg"> {{ errorMsg }}</div>
         </mat-card-content>
       </mat-card>
     </div>
 
     <div class="dataTable">
-      <table *ngIf="viewStudentsScreen" mat-table [dataSource]="studentData" class="mat-elevation-z8">
-  
+      <table *ngIf="studentsView.viewStudentsScreen" mat-table [dataSource]="studentsView.studentData" class="mat-elevation-z8">
+
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
-      
+
         <!-- ID Column -->
         <ng-container matColumnDef="studentId">
           <th mat-header-cell *matHeaderCellDef> ID </th>
           <td mat-cell *matCellDef="let element"> {{element.studentid}} </td>
         </ng-container>
-      
+
         <!-- Name Column -->
         <ng-container matColumnDef="studentName">
           <th mat-header-cell *matHeaderCellDef> Name </th>
           <td mat-cell *matCellDef="let element"> {{element.studentname}} </td>
         </ng-container>
-      
+
         <!-- Major Column -->
         <ng-container matColumnDef="studentMajor">
           <th mat-header-cell *matHeaderCellDef> Major </th>
           <td mat-cell *matCellDef="let element"> {{element.major}} </td>
         </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="studentDataTableColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: studentDataTableColumns;"></tr>
+
+        <tr mat-header-row *matHeaderRowDef="studentsView.studentDataTableColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: studentsView.studentDataTableColumns;"></tr>
       </table>
 
-      <table *ngIf="viewDepartmentCourseScreen" mat-table [dataSource]="departmentCourseData" class="mat-elevation-z8">      
+      <table *ngIf="coursesByDeptView.viewDepartmentCourseScreen" mat-table [dataSource]="coursesByDeptView.departmentCourseData" class="mat-elevation-z8">
         <ng-container matColumnDef="deptCode">
           <th mat-header-cell *matHeaderCellDef> Deptartment Code </th>
           <td mat-cell *matCellDef="let element"> {{element.deptcode}} </td>
         </ng-container>
-      
+
         <ng-container matColumnDef="courseNumber">
           <th mat-header-cell *matHeaderCellDef> Course Number </th>
           <td mat-cell *matCellDef="let element"> {{element.coursenum}} </td>
         </ng-container>
-      
+
         <ng-container matColumnDef="courseTitle">
           <th mat-header-cell *matHeaderCellDef> Course Title </th>
           <td mat-cell *matCellDef="let element"> {{element.title}} </td>
@@ -86,23 +87,33 @@
             <th mat-header-cell *matHeaderCellDef> Credit Hours </th>
             <td mat-cell *matCellDef="let element"> {{element.credithours}} </td>
           </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="departmentCourseDataTableColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: departmentCourseDataTableColumns;"></tr>
+
+        <tr mat-header-row *matHeaderRowDef="coursesByDeptView.departmentCourseDataTableColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: coursesByDeptView.departmentCourseDataTableColumns;"></tr>
       </table>
 
-      <table *ngIf="viewStudentCoursesScreen" mat-table [dataSource]="studentCoursesData" class="mat-elevation-z8">
+      <table *ngIf="coursesByStudentView.viewStudentCoursesScreen" mat-table [dataSource]="coursesByStudentView.studentCoursesData" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="studentId">
+          <th mat-header-cell *matHeaderCellDef> Student ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.studentid}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="studentName">
+          <th mat-header-cell *matHeaderCellDef> Student Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.studentname}} </td>
+        </ng-container>
 
         <ng-container matColumnDef="deptCode">
           <th mat-header-cell *matHeaderCellDef> Deptartment Code </th>
           <td mat-cell *matCellDef="let element"> {{element.deptcode}} </td>
         </ng-container>
-      
+
         <ng-container matColumnDef="courseNumber">
           <th mat-header-cell *matHeaderCellDef> Course Number </th>
           <td mat-cell *matCellDef="let element"> {{element.coursenum}} </td>
         </ng-container>
-      
+
         <ng-container matColumnDef="courseTitle">
           <th mat-header-cell *matHeaderCellDef> Course Title </th>
           <td mat-cell *matCellDef="let element"> {{element.title}} </td>
@@ -112,9 +123,9 @@
             <th mat-header-cell *matHeaderCellDef> Credit Hours </th>
             <td mat-cell *matCellDef="let element"> {{element.credithours}} </td>
           </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="studentCoursesDataTableColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: studentCoursesDataTableColumns;"></tr>
+
+        <tr mat-header-row *matHeaderRowDef="coursesByStudentView.studentCoursesDataTableColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: coursesByStudentView.studentCoursesDataTableColumns;"></tr>
       </table>
     </div>
   </div>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {RouteTypes} from '../route-types.enum';
 import {ActivatedRoute} from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-add',
@@ -12,7 +13,12 @@ export class AddComponent implements OnInit {
 
   type: RouteTypes;
   welcomeMsg: string;
-  serverUrl = 'http://localhost:3000';
+
+  // local
+  // serverUrl = 'http://localhost:3000';
+
+  // prod
+  serverUrl = 'https://uark-db-project.herokuapp.com';
 
   // Add Student Variables
   addStudentScreen: boolean;
@@ -96,14 +102,24 @@ export class AddComponent implements OnInit {
   }
 
   addStudent() {
-    console.log('here');
     const studentToAdd = {
       studentName: this.studentName,
       studentMajor: this.studentMajor
     };
-    this.http.post(this.serverUrl + '/addStudent', studentToAdd).subscribe(() => {
-      console.log('added student');
-    });
+    this.http.post(this.serverUrl + '/addStudent', studentToAdd).subscribe(
+      response => {
+        const resObject = JSON.parse(JSON.stringify(response));
+        if (resObject.success) {
+          alert(`Successfully added student ${resObject.data}`);
+        } else {
+          alert(`Error adding student: ${resObject.data.detail}`);
+        }
+      },
+      (error: HttpErrorResponse) => {
+        const resObject = JSON.parse(JSON.stringify(error.error));
+        alert(`Error adding student: ${resObject.data.detail}`);
+      }
+    );
   }
 
   addCourse() {
@@ -113,9 +129,20 @@ export class AddComponent implements OnInit {
       courseTitle: this.courseTitle,
       courseCreditHours: this.courseCreditHours
     };
-    this.http.post(this.serverUrl + '/addCourse', courseToAdd).subscribe(() => {
-      console.log('added course');
-    });
+    this.http.post(this.serverUrl + '/addCourse', courseToAdd).subscribe(
+      response => {
+        const resObject = JSON.parse(JSON.stringify(response));
+        if (resObject.success) {
+          alert(`Successfully added course ${resObject.data.courseDeptCode} ${resObject.data.courseNumber}: ${resObject.data.courseTitle}`);
+        } else {
+          alert(`Error adding course`);
+        }
+      },
+      (error: HttpErrorResponse) => {
+        const resObject = JSON.parse(JSON.stringify(error.error));
+        alert(`Error adding course: ${resObject.data.detail}`);
+      }
+    );
   }
 
   addApplication() {
@@ -124,9 +151,22 @@ export class AddComponent implements OnInit {
       applicationCourseNumber: this.applicationCourseNumber,
       applicationStudentId: this.applicationStudentId
     };
-    this.http.post(this.serverUrl + '/addApplication', applicationToAdd).subscribe(() => {
-      console.log('added application');
-    });
+    this.http.post(this.serverUrl + '/addApplication', applicationToAdd).subscribe(
+      response => {
+        const resObject = JSON.parse(JSON.stringify(response));
+        if (resObject.success) {
+          alert(`Successfully added enrollment info:
+          Student ID - ${resObject.data.applicationStudentId}
+          Course Info - ${resObject.data.applicationDeptCode} ${resObject.data.applicationCourseNumber}`);
+        } else {
+          alert(`Error adding enrollment`);
+        }
+      },
+      (error: HttpErrorResponse) => {
+        const resObject = JSON.parse(JSON.stringify(error.error));
+        alert(`Error adding enrollment: ${resObject.data.detail}`);
+      }
+    );
   }
 
 }

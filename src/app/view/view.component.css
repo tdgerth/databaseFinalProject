@@ -2,7 +2,7 @@
     max-width: 400px;
     margin: 20px;
 }
-  
+
 .header {
     font-size: 30px;
 }
@@ -22,4 +22,8 @@ table {
 .dataTable {
     margin: 20px;
     width: 100%;
+}
+
+.errorMsg {
+  color: darkred;
 }
