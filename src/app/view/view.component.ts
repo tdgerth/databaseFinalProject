@@ -12,7 +12,7 @@ export class ViewComponent implements OnInit {
 
   type: RouteTypes;
   welcomeMsg: string;
-  serverUrl = 'https://uark-db-project.herokuapp.com';
+  serverUrl = 'http://localhost:3000';
 
   // View Students Variables
   viewStudentsScreen: boolean;

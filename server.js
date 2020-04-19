@@ -7,10 +7,7 @@ const bodyParser = require('body-parser');
 
 const clientCredentials = {
   connectionString: process.env.DATABASE_URL,
-  ssl: {
-    require: true,
-    rejectUnauthorized: false
-  }
+  ssl: true
 };
 
 const app = express();
