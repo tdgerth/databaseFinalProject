@@ -36,7 +36,7 @@
     "body-parser": "latest"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.803.20",
+    "@angular-devkit/build-angular": "~15.0.4",
     "@angular/cli": "^9.1.0",
     "@angular/language-service": "~9.1.0",
     "@types/jasmine": "~3.3.8",
